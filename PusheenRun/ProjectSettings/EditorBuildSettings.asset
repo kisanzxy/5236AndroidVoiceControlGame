@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2ad0ab6ab225dff4eb80a165e60692d2
-  - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: 2485369df364a3e448ffd5916e29d319
-  - enabled: 1
-    path: Assets/Scenes/SkinSelectionMenu.unity
-    guid: 97299791e45d9834cbf8b0471b37010f
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: 75cc1f1ab920e7e4887201b192436dfc
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelection.unity
+    guid: 2485369df364a3e448ffd5916e29d319
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 97299791e45d9834cbf8b0471b37010f
   m_configObjects: {}
