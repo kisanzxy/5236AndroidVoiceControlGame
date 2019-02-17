@@ -18,8 +18,8 @@ AudioClip micRecord;
     // Start is called before the first frame update
     void Start()
     {
-        
-        device = Microphone.devices[1];
+        volume = 5f;
+        device = Microphone.devices[0];
         Debug.Log(device);
         micRecord = Microphone.Start(device, true, 999, 44100);
         Debug.Log(micRecord);
