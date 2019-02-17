@@ -55,10 +55,10 @@ public class characterController : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(grounded);
+       // Debug.Log(grounded);
         if (grounded)
             m_Character.velocity = new Vector2(moveSpeed, m_Character.velocity.y);
-        Debug.Log(m_Character.velocity.x);
+       // Debug.Log(m_Character.velocity.x);
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             m_Character.velocity = new Vector2(m_Character.velocity.x, upForce);
         }

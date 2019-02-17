@@ -53,12 +53,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BackgroundScroller.cs" />
+     <Compile Include="Assets\Scripts\CameraTransform.cs" />
      <Compile Include="Assets\Scripts\characterController.cs" />
      <Compile Include="Assets\Scripts\CharacterEnum.cs" />
      <Compile Include="Assets\Scripts\CharacterSpriteFactory.cs" />
      <Compile Include="Assets\Scripts\CharacterSpriteRenderer.cs" />
      <Compile Include="Assets\Scripts\ClickManager.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Scripts\PlatformGenerator.cs" />
      <Compile Include="Assets\Scripts\SelectionManager.cs" />
      <Compile Include="Assets\Scripts\timeoutScript.cs" />
