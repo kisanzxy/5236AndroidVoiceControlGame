@@ -13,13 +13,13 @@ public class CameraTransform : MonoBehaviour
     void Start()
     {
         m_Camera = GetComponent<Camera>();
-        Debug.Log(transform.position.x - player.position.x );
+        //Debug.Log(transform.position.x - player.position.x );
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("player" + player.position);
+        //Debug.Log("player" + player.position);
         if (player)
         {
             Vector3 point = m_Camera.WorldToViewportPoint(player.position);

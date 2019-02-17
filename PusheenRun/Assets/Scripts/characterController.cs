@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class characterController : MonoBehaviour
 {
-    public float upForce = 200f;    //Upward force for jumping
+    public float upForce = 100f;    //Upward force for jumping
     public float moveSpeed = 0;     // horizontal speed
     public float maxSpeed = 5f;
     public Transform groundCheck;
@@ -24,6 +24,7 @@ public class characterController : MonoBehaviour
     bool grounded = false;
     float groundRadius = 1.5f;
     bool doubleJump = false;
+    float divisor;
 
     // Start is called before the first frame update
     void Start()
@@ -58,9 +59,23 @@ public class characterController : MonoBehaviour
        // Debug.Log(grounded);
         if (grounded)
             m_Character.velocity = new Vector2(moveSpeed, m_Character.velocity.y);
-       // Debug.Log(m_Character.velocity.x);
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+        // Debug.Log(m_Character.velocity.x);
+        if (MicInputController.volume > 100)
+        {
             m_Character.velocity = new Vector2(m_Character.velocity.x, upForce);
+        }
+        else if (MicInputController.volume > 30)
+        {
+            divisor = 5;
+            m_Character.velocity = new Vector2(m_Character.velocity.x, upForce / divisor);
+        }
+        else if (MicInputController.volume > 5)
+        {
+            divisor = 10;
+            m_Character.velocity = new Vector2(m_Character.velocity.x, upForce / divisor);
+        }
+        else {
+            //doing nothing
         }
     }
 
