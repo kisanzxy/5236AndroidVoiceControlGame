@@ -5,81 +5,65 @@ using UnityEngine;
 public class characterController : MonoBehaviour
 {
     public float upForce = 200f;    //Upward force for jumping
+    public float moveSpeed = 0;     // horizontal speed
+    public float maxSpeed = 5f;
+    public Transform groundCheck;
+    public LayerMask whatIsGround;
+
+    private SpriteRenderer m_SpriteRenderer;
+    private Sprite m_CurSprite;         // sprite used for load image
     private bool isDead = false;    //Has the character fall out of the screen?
     
-    private Animator anim;          //Reference to the Animator component.
-    private Rigidbody2D character;  //Reference to the Rigidbody2D of the character.
+    private Animator m_Anim;          //Reference to the Animator component.
+    private Rigidbody2D m_Character;  //Reference to the Rigidbody2D of the character.
+    private BoxCollider2D m_Collider;
+    //private float m_ScaleX, m_ScaleY, m_ScaleZ;
 
 
-	public float maxSpeed = 5f;
-	bool facingRight = true;
+    bool facingRight = true;
     bool grounded = false;
-    public Transform groundCheck;
-    float groundRadius = 0.2f;
-    public LayerMask whatIsGround;
+    float groundRadius = 1.5f;
     bool doubleJump = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Load current sprite
+        m_CurSprite = CharacterSpriteFactory.moveSpriteFactory(CharacterSpriteRenderer.CharacterID);
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.sprite = m_CurSprite;
         //Get reference to the Animator component attached to the character.
-        anim = GetComponent<Animator>();
+        //m_Anim = GetComponent<Animator>();
         //Get reference to the Rigidbody2D component attached to the character.
-        character = GetComponent<Rigidbody2D>();
+        m_Character = GetComponent<Rigidbody2D>();
+        //Get reference to the BoxCollider2D component attached to the character.
+        m_Collider = GetComponent<BoxCollider2D>();
+        //set size
+        m_Collider.size = m_SpriteRenderer.size;
+        m_Collider.offset = new Vector2(1f, 2.6f);
+
     }
 
     // Update is called once per frame
+
     void FixedUpdate()
     {
+
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        anim.SetBool("Ground", grounded);
-        if(grounded)
-            doubleJump = false;
 
-        anim.SetFloat("vSpeed", character.velocity.y);
-
-        float move = Input.GetAxis("Horizontal");
-        anim.SetFloat("Speed", Mathf.Abs(move));
-        character.velocity = new Vector2(move * maxSpeed, character.velocity.y);
-        if (move > 0 && !facingRight)
-        	Flip();
-        else if (move < 0 && facingRight)
-        	Flip();
     }
-
     void Update()
     {
-        if (isDead == false)
-        {
-            if(Input.GetMouseButtonDown(0))
-            {
-                //Zero out the character's current y velocity
-                character.velocity = Vector2.zero;
-                //Give the character some upward force.
-                character.AddForce(new Vector2(0, upForce));
-            }
-        }
-        if((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
-        {
-            anim.SetBool("Ground", false);
-            character.velocity = Vector2.zero;
-            character.AddForce(new Vector2(0, upForce));
 
-            if (!doubleJump && !grounded)
-                doubleJump = true;
+        Debug.Log(grounded);
+        if (grounded)
+            m_Character.velocity = new Vector2(moveSpeed, m_Character.velocity.y);
+        Debug.Log(m_Character.velocity.x);
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+            m_Character.velocity = new Vector2(m_Character.velocity.x, upForce);
         }
     }
 
-    // void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     character.velocity = Vector2.zero;
-    //     // If the bird collides with something set it to dead...
-    //     isDead = true;
-    //     //...tell the Animator about it...
-    //     anim.SetTrigger ("Die");
-    //     //...and tell the game control about it.
-    //     // GameController.instance.CharacterDied();
-    // }
 
     void Flip()
     {

@@ -14,7 +14,7 @@ public class CharacterSpriteRenderer : MonoBehaviour
     void Start()
     {
         CharacterID = 0;
-        m_CurSprite = Resources.Load<Sprite>(srcPath(CharacterID));
+        m_CurSprite = CharacterSpriteFactory.spriteFactory(CharacterID);
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         //Set the GameObject's Color quickly to a set Color (blue)
         m_SpriteRenderer.sprite = m_CurSprite;
@@ -24,33 +24,9 @@ public class CharacterSpriteRenderer : MonoBehaviour
     void Update()
     {
         Debug.Log(CharacterID);
-        m_CurSprite = Resources.Load<Sprite>(srcPath(CharacterID));
+        m_CurSprite = CharacterSpriteFactory.spriteFactory(CharacterID);
         m_SpriteRenderer.sprite = m_CurSprite;
     }
 
 
-
-    public string srcPath(int id) {
-        string path = "Sprites/";
-        if (id == (int)CharacterSprite.normal)
-        {
-            return path + "Normal";
-        }
-        else if (id == (int)CharacterSprite.curl) {
-            return path + "Curl";
-        }
-        else if (id == (int)CharacterSprite.unicorn)
-        {
-            return path + "Unicorn";
-        }
-        else if (id == (int)CharacterSprite.dinasour)
-        {
-            return path + "Dinasour";
-        }
-        else
-        {
-            return path + "Normal";
-        }
-
-    }
 }
