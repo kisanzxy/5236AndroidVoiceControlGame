@@ -39,4 +39,7 @@ public class SelectionManager : MonoBehaviour
     public void selection() {
         SceneManager.LoadScene("Level1");
     }
+    public void back(){
+        SceneManager.LoadScene("StartMenu");
+    }
 }
