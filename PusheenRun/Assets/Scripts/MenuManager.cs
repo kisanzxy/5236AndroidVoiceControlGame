@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public GameObject transparentBackground;
     public GameObject instruction;
     public GameObject cross;
     public Image volumeButton;
@@ -53,12 +54,14 @@ public class MenuManager : MonoBehaviour
 
     public void showInstruction()
     {
+    	transparentBackground.SetActive(true);
         instruction.SetActive(true);
         cross.SetActive(true);
     }
 
     public void closeInstruction()
     {
+        transparentBackground.SetActive(false);
         instruction.SetActive(false);
         cross.SetActive(false);
     }
