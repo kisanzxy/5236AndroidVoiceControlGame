@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
         }
         int minutes = (int)(timer/60f);
         int seconds = (int)(timer % 60f);
-        timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        timerText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
     public void updateScores()
