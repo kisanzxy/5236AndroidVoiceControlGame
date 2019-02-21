@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "176209430474",
+    "firebase_url": "https://pusheenrun.firebaseio.com",
+    "project_id": "pusheenrun",
+    "storage_bucket": "pusheenrun.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176209430474:android:1265f09afa66647b",
+        "android_client_info": {
+          "package_name": "com.mobileApp.PusheenRun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176209430474-j4kpa6hhh04b10j3lt13dfms5ta2jt1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW1E4zuMNDydjvTyVDPFlkdXWrgSkns2U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
