@@ -1,4 +1,0 @@
-#Thu Feb 21 08:52:41 EST 2019
-base.0=C\:\\Users\\XiangLi\\AndroidStudioProjects\\PusheenRun\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\7
-path.0=classes.dex
-renamed.0=classes.dex
