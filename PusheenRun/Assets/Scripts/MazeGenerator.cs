@@ -43,7 +43,7 @@ public class MazeGenerator : MonoBehaviour {
     // ------------------------------------------------------
 
     // Variable to store size of centre room. Hard coded to be 2.
-    private int centreSize = 2;
+    public int centreSize = 2;
 
     // Dictionary to hold and locate all cells in maze.
     private Dictionary<Vector2, Cell> allCells = new Dictionary<Vector2, Cell>();
@@ -306,8 +306,9 @@ public class MazeGenerator : MonoBehaviour {
         if (mazeColumns <= 3) mazeColumns = 4;
 
         // Determine size of cell using localScale.
-        cellSize = cellPrefab.transform.localScale.x;
-
+        SpriteRenderer spr = cellPrefab.GetComponent<SpriteRenderer>();
+        cellSize = spr.size.x;
+        //cellSize = cellPrefab.transform.localScale.x;
         // Create an empty parent object to hold the maze in the scene.
         mazeParent = new GameObject();
         mazeParent.transform.position = Vector2.zero;
