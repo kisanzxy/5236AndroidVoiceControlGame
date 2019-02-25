@@ -20,6 +20,7 @@ AudioClip micRecord;
     {
         volume = 5f;
         device = Microphone.devices[0];
+        multiplier = 1f;
         Debug.Log(device);
         micRecord = Microphone.Start(device, true, 999, 44100);
         Debug.Log(micRecord);

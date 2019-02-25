@@ -42,7 +42,6 @@ public class characterController : MonoBehaviour
         //set size
         m_Collider.size = m_SpriteRenderer.size;
         m_Collider.offset = new Vector2(1f, 2.6f);
-
     }
 
     // Update is called once per frame
