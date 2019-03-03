@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class characterController : MonoBehaviour
 {
-    public float upForce = 100f;    //Upward force for jumping
+    public float upForce = 50f;    //Upward force for jumping
     public float moveSpeed = 0;     // horizontal speed
     public float maxSpeed = 5f;
     public Transform groundCheck;

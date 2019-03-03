@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     public Sprite musicOff;
 
     private int score = 0;                      //The player's score.
+    private int count = 0;
     public float scrollSpeed = -1.5f;
 
     // Initialize game
@@ -47,7 +48,7 @@ public class GameController : MonoBehaviour
         } else {
             volumeButtonImage.sprite = musicOff;
         }
-
+        PlayerPrefs.SetInt("PlayerScore", 0);
         Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
         gameover = false;
         paused = false;
@@ -58,6 +59,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        count++;
         // //If the game is over and the player has pressed some input...
         // if (gameOver && Input.GetMouseButtonDown(0)) 
         // {
@@ -75,10 +77,20 @@ public class GameController : MonoBehaviour
                 characterDied();
             }
         }
+        if (gameover) {
+            PlayerPrefs.SetInt("PlayerScore", score);
+        }
         int minutes = (int)(timer/60f);
         int seconds = (int)(timer % 60f);
         timerText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
-    	Debug.Log(timer);
+        if(count == 100)
+        {
+            count = 0;
+            updateScores();
+        }
+        
+
+        Debug.Log(timer);
     }
 
     public void updateScores()
@@ -127,6 +139,7 @@ public class GameController : MonoBehaviour
     {
         paused = false;
         Time.timeScale = 1;
+        PlayerPrefs.SetInt("PlayerScore", score);
         SceneManager.LoadScene("StartMenu");
     }
 
@@ -134,7 +147,14 @@ public class GameController : MonoBehaviour
     {   
         SceneManager.LoadScene("Level1");
     }
+    public bool isGameOver()
+    {
+        return this.gameover;
+    }
 
+    public int getScore() {
+        return this.score;
+    }
     public void musicSetting() 
     {
         if(PlayerPrefs.GetInt("musicStatus") == 1){

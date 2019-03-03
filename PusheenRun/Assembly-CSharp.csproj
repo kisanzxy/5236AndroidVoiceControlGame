@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\CharacterEnum.cs" />
      <Compile Include="Assets\Scripts\CharacterSpriteFactory.cs" />
      <Compile Include="Assets\Scripts\CharacterSpriteRenderer.cs" />
+     <Compile Include="Assets\Scripts\FirebaseModel.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MazeGenerator.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
