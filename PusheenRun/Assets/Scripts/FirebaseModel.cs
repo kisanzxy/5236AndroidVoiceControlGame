@@ -4,18 +4,28 @@ using UnityEngine;
 using Firebase.Database;
 using Firebase.Unity.Editor;
 using Firebase;
+using Firebase.Auth;
 
 public class FirebaseModel : MonoBehaviour
 {
+    private FirebaseAuth auth;
     private string email;
-    private int score = 0 ;
+    private long score = 0 ;
     private GameController gameController;
     private bool scoreSent = false;
     private int MaxScores = 10;
     protected bool isFirebaseInitialized = false;
+    private string uid;
+    private Firebase.Auth.FirebaseUser user;
+    private FirebaseDatabase mDatabase;
+    private DataSnapshot snapshot;
     // Start is called before the first frame update
     void Start()
     {
+
+        InitializeFirebase();
+        uid = PlayerPrefs.GetString("Uid");
+        Debug.Log(uid);
         email = PlayerPrefs.GetString("LoginUser");
         gameController = GameController.instance;
     }
@@ -24,8 +34,10 @@ public class FirebaseModel : MonoBehaviour
     void Update()
     {
         if (gameController.isGameOver() && !scoreSent) {
-            score = gameController.getScore();
+            score = (long) gameController.getScore();
+            Debug.Log(mDatabase);
             AddScore();
+            AddNewScoreToUser();
             scoreSent = true;
         }
         
@@ -40,20 +52,66 @@ public class FirebaseModel : MonoBehaviour
         app.SetEditorDatabaseUrl("https://pusheenrun.firebaseio.com/");
         if (app.Options.DatabaseUrl != null)
             app.SetEditorDatabaseUrl(app.Options.DatabaseUrl);
-
+        mDatabase = FirebaseDatabase.GetInstance(app);
         isFirebaseInitialized = true;
+    }
+    private void AddNewScoreToUser() {
+        DatabaseReference mDatabaseRef = mDatabase.GetReference("user_Maxscore");
+        Dictionary<string, object> entryValues = new Dictionary<string, object>();
+        entryValues["score"] = score;
+        entryValues["email"] = email;
+        entryValues["time"] = System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy");
+        Dictionary<string, object> childUpdates = new Dictionary<string, object>();
+
+        Debug.Log(mDatabaseRef.Child(uid));
+        /*if (mDatabaseRef.Child(uid) == null)
+        {
+            childUpdates[uid] = entryValues;
+            mDatabaseRef.UpdateChildrenAsync(childUpdates);
+        }
+        else
+        {*/
+            mDatabaseRef.Child(uid).GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("error get child at user_Maxscore");
+
+                }
+                else if (task.IsCompleted)
+                {
+                    snapshot = task.Result;
+
+                }
+                List<object> result = snapshot.Children as List<object>;
+                if (result == null)
+                {
+                    childUpdates[uid] = entryValues;
+                    mDatabaseRef.UpdateChildrenAsync(childUpdates);
+                }
+                else 
+                {
+                    long childScore = (long)((Dictionary<string, object>)result[0])["score"];
+                    if(childScore < score)
+                        mDatabaseRef.Child(uid).Child("score").SetValueAsync(score);
+                }
+            });
+
+
+        //}
     }
 
     TransactionResult AddScoreTransaction(MutableData mutableData)
     {
-        List<object> scores = mutableData.Value as List<object>;
-        if (scores == null)
-            scores = new List<object>();
+        List<object> user_scores = mutableData.Value as List<object>;
+        if (user_scores == null)
+            user_scores = new List<object>();
         else if (mutableData.ChildrenCount >= MaxScores)
         {
             long minScore = long.MaxValue;
             object minVal = null;
-            foreach (var child in scores)
+            
+            foreach (var child in user_scores)
             {
                 if (!(child is Dictionary<string, object>))
                     continue;
@@ -70,15 +128,16 @@ public class FirebaseModel : MonoBehaviour
                 return TransactionResult.Abort();
             }
 
-            scores.Remove(minVal);
+            user_scores.Remove(minVal);
 
         }
         Dictionary<string, object> newScoreMap = new Dictionary<string, object>();
+        
         newScoreMap["score"] = score;
         newScoreMap["email"] = email;
         newScoreMap["time"] = System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy");
-        scores.Add(newScoreMap);
-        mutableData.Value = scores;
+        user_scores.Add(newScoreMap);
+        mutableData.Value = user_scores;
         return TransactionResult.Success(mutableData);
     }
 
@@ -92,8 +151,8 @@ public class FirebaseModel : MonoBehaviour
         Debug.LogFormat("Attempting to add score {0} {1}",
           email, score.ToString());
 
-        DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("scores");
-
+        //DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("scores");
+        DatabaseReference reference = mDatabase.GetReference("leaders");
         Debug.Log("Running Transaction...");
         // Use a transaction to ensure that we do not encounter issues with
         // simultaneous updates that otherwise might create more than MaxScores top scores.

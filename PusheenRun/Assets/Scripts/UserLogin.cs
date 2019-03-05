@@ -88,6 +88,7 @@ public class UserLogin : MonoBehaviour
                 user.DisplayName, user.UserId);
 
             PlayerPrefs.SetString("LoginUser", user != null ? user.Email : "Unknown");
+            PlayerPrefs.SetString("Uid", user != null ? user.UserId : "Unknown");
             SceneManager.LoadScene("StartMenu");
         });
     }
