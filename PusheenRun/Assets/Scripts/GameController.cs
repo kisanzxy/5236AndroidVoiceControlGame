@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
         }
         
 
-        Debug.Log(timer);
+        //Debug.Log(timer);
     }
 
     public void updateScores()
@@ -165,6 +165,6 @@ public class GameController : MonoBehaviour
             volumeButtonImage.sprite = musicOn;
         }
 
-        Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
+        //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
     }
 }

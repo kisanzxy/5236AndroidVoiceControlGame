@@ -23,7 +23,7 @@ public class CharacterSpriteRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(CharacterID);
+        //Debug.Log(CharacterID);
         m_CurSprite = CharacterSpriteFactory.spriteFactory(CharacterID);
         m_SpriteRenderer.sprite = m_CurSprite;
     }

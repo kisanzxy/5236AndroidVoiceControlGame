@@ -20,10 +20,23 @@ public class FirebaseModel : MonoBehaviour
     private FirebaseDatabase mDatabase;
     private DataSnapshot snapshot;
     // Start is called before the first frame update
+    private DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
     void Start()
     {
 
-        InitializeFirebase();
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+            dependencyStatus = task.Result;
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                Debug.Log("InitializeFirebase");
+                InitializeFirebase();
+            }
+            else
+            {
+                Debug.Log(
+                  "Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
+        });
         uid = PlayerPrefs.GetString("Uid");
         Debug.Log(uid);
         email = PlayerPrefs.GetString("LoginUser");
@@ -77,8 +90,8 @@ public class FirebaseModel : MonoBehaviour
                 Debug.Log("continue");
                 if (task.IsFaulted)
                 {
-                    Debug.LogError("error get child at user_Maxscore");
-
+                    Debug.Log("error get child at user_Maxscore");
+                    return;
                 }
                 else if (task.IsCompleted)
                 {
@@ -90,11 +103,13 @@ public class FirebaseModel : MonoBehaviour
                 Debug.Log(result);
                 if (result == null)
                 {
+                    Debug.Log("add New user score");
                     childUpdates[uid] = entryValues;
                     mDatabaseRef.UpdateChildrenAsync(childUpdates);
                 }
                 else 
                 {
+                    Debug.Log("update user score");
                     long childScore = (long) result["score"];
                     if(childScore < score)
                         mDatabaseRef.Child(uid).Child("score").SetValueAsync(score);

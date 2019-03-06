@@ -31,7 +31,7 @@ AudioClip micRecord;
     {
     
         volume = (float)Math.Round(GetMaxVolume(), 4) * difference * multiplier*amplify;
-        Debug.Log("volume: "+volume);
+        //Debug.Log("volume: "+volume);
     }
     void OnGUI() {
         GUI.Label(new Rect(0, 30, 60, 40), "volume: ");

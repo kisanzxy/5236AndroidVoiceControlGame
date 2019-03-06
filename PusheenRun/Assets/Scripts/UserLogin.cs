@@ -13,12 +13,23 @@ public class UserLogin : MonoBehaviour
     public Text ErrorText;
     private string email;
     private string password;
+    Firebase.DependencyStatus dependencyStatus = Firebase.DependencyStatus.UnavailableOther;
     // Start is called before the first frame update
     void Start()
     {
-        auth = FirebaseAuth.DefaultInstance;
-        //SignUp.onClick.AddListener(() => Signup(Email.text, Password.text));
-        //LoginButton.onClick.AddListener(() => Login(Email.text, Password.text));
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+            dependencyStatus = task.Result;
+            if (dependencyStatus == Firebase.DependencyStatus.Available)
+            {
+                Debug.Log("initialize");
+                auth = FirebaseAuth.DefaultInstance;
+            }
+            else
+            {
+                Debug.LogError(
+                  "Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
+        });
     }
 
     // Update is called once per frame

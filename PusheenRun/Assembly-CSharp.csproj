@@ -81,19 +81,19 @@
      <None Include="Assets\Firebase\Plugins\Http\link.xml" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -294,37 +294,37 @@
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.App">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Auth">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Platform">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
  </Reference>
  <Reference Include="Google.MiniJson">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
  </Reference>
  <Reference Include="Google.Sharpen">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Database">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Mono/Firebase.Database.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Mono/Firebase.Database.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Compat">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/Unity.Compat.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/Unity.Compat.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Tasks">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/Unity.Tasks.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/Unity.Tasks.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>D:/UnityWorkSpace/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>D:/UnityWorkSpace/mobileApp/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>D:/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
