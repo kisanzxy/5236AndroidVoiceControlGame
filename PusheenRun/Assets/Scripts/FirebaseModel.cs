@@ -120,7 +120,7 @@ public class FirebaseModel : MonoBehaviour
         Debug.Log(user_score);
         if (user_score == null)
             user_score = entryValues;
-        else if (mutableData.ChildrenCount >= 0)
+        else //if (mutableData.ChildrenCount >= 0)
         {
             long minVal = (long)user_score["score"];
             if (minVal < score)
