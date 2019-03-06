@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
             volumeButtonImage.sprite = musicOff;
         }
         PlayerPrefs.SetInt("PlayerScore", 0);
-        Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
+        //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
         gameover = false;
         paused = false;
         Time.timeScale = 1;

@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
             PlayerPrefs.SetInt("musicStatus", 1);
         }
         
-        Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
+        //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class MenuManager : MonoBehaviour
             volumeButton.sprite = musicOn;
         }
 
-        Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
+        //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
     }
 
     public void showInstruction()

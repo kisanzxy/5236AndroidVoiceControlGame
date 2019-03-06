@@ -31,7 +31,7 @@ public class CharacterVoiceControl : MonoBehaviour
         //m_Anim = GetComponent<Animator>();
         //Get reference to the Rigidbody2D component attached to the character.
         m_Character = GetComponent<Rigidbody2D>();
-        Debug.Log(m_Character);
+        //Debug.Log(m_Character);
         //Get reference to the BoxCollider2D component attached to the character.
         // m_Collider = GetComponent<BoxCollider2D>();
         // Debug.Log(m_Collider);

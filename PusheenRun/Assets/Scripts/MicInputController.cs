@@ -53,7 +53,7 @@ AudioClip micRecord;
 
         //snipe record from offset
         micRecord.GetData(volumeData, offset);
-        Debug.Log(micRecord.GetData(volumeData, offset));
+        //Debug.Log(micRecord.GetData(volumeData, offset));
         //find max volum
         for (int i = 0; i < volumeData.Length; i++)
         {

@@ -96,24 +96,24 @@ public class FirebaseModel : MonoBehaviour
                 else if (task.IsCompleted)
                 {
                     snapshot = task.Result;
+                    //Debug.Log(snapshot.GetValue(false));
+                    Dictionary<string, object> result = snapshot.GetValue(false) as Dictionary<string, object>;
+                    Debug.Log(result);
+                    if (result == null)
+                    {
+                        Debug.Log("add New user score");
+                        childUpdates[uid] = entryValues;
+                        mDatabaseRef.UpdateChildrenAsync(childUpdates);
+                    }
+                    else
+                    {
+                        Debug.Log("update user score");
+                        long childScore = (long)result["score"];
+                        if (childScore < score)
+                            mDatabaseRef.Child(uid).Child("score").SetValueAsync(score);
+                    }
+                }
 
-                }
-                //Debug.Log(snapshot.GetValue(false));
-                Dictionary<string, object> result = snapshot.GetValue(false) as Dictionary<string, object>;
-                Debug.Log(result);
-                if (result == null)
-                {
-                    Debug.Log("add New user score");
-                    childUpdates[uid] = entryValues;
-                    mDatabaseRef.UpdateChildrenAsync(childUpdates);
-                }
-                else 
-                {
-                    Debug.Log("update user score");
-                    long childScore = (long) result["score"];
-                    if(childScore < score)
-                        mDatabaseRef.Child(uid).Child("score").SetValueAsync(score);
-                }
             });
 
 
