@@ -50,7 +50,7 @@ public class FirebaseModel : MonoBehaviour
             score = (long) gameController.getScore();
             Debug.Log(mDatabase);
             
-            AddNewScoreToUser();
+            AddNewUserScore();
             AddScore();
             scoreSent = true;
         }
@@ -69,7 +69,7 @@ public class FirebaseModel : MonoBehaviour
         mDatabase = FirebaseDatabase.GetInstance(app);
         isFirebaseInitialized = true;
     }
-    public void AddNewScoreToUser() {
+   /* public void AddNewScoreToUser() {
         DatabaseReference mDatabaseRef = mDatabase.GetReference("user_Maxscore");
         Dictionary<string, object> entryValues = new Dictionary<string, object>();
         entryValues["score"] = score;
@@ -108,8 +108,32 @@ public class FirebaseModel : MonoBehaviour
                 }
 
             });
+    }*/
+    TransactionResult AddNewUserScoreTransaction(MutableData mutableData)
+    {
+  
+        Dictionary<string, object> entryValues = new Dictionary<string, object>();
+        entryValues["score"] = score;
+        entryValues["email"] = email;
+        entryValues["time"] = System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy");
+        Dictionary<string, object> user_score = mutableData.Value as Dictionary<string, object>;
+        Debug.Log(user_score);
+        if (user_score == null)
+            user_score = entryValues;
+        else if (mutableData.ChildrenCount >= 0)
+        {
+            long minVal = (long)user_score["score"];
+            if (minVal < score)
+            {
+                user_score["score"] = score;
+            }
+            else {
+                return TransactionResult.Abort();
+            }
+        }
+        mutableData.Value = user_score;
+        return TransactionResult.Success(mutableData);
     }
-
     TransactionResult AddScoreTransaction(MutableData mutableData)
     {
         List<object> user_scores = mutableData.Value as List<object>;
@@ -119,7 +143,7 @@ public class FirebaseModel : MonoBehaviour
         {
             long minScore = long.MaxValue;
             object minVal = null;
-            
+
             foreach (var child in user_scores)
             {
                 if (!(child is Dictionary<string, object>))
@@ -141,7 +165,7 @@ public class FirebaseModel : MonoBehaviour
 
         }
         Dictionary<string, object> newScoreMap = new Dictionary<string, object>();
-        
+
         newScoreMap["score"] = score;
         newScoreMap["email"] = email;
         newScoreMap["time"] = System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy");
@@ -170,6 +194,33 @@ public class FirebaseModel : MonoBehaviour
               if (task.Exception != null)
               {
                   Debug.Log(task.Exception.ToString());
+              }
+              else if (task.IsCompleted)
+              {
+                  Debug.Log("Transaction complete.");
+              }
+          });
+    }
+    public void AddNewUserScore()
+    {
+        if (score == 0 || string.IsNullOrEmpty(email))
+        {
+            Debug.Log("invalid score or email.");
+            return;
+        }
+        Debug.LogFormat("Attempting to add new user score {0} {1}",
+          email, score.ToString());
+
+        //DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("scores");
+        DatabaseReference reference = mDatabase.GetReference("user_Maxscore").Child(uid);
+        Debug.Log("Running New User Score Transaction...");
+        // Use a transaction to ensure that we do not encounter issues with
+        // simultaneous updates that otherwise might create more than MaxScores top scores.
+        reference.RunTransaction(AddNewUserScoreTransaction)
+          .ContinueWith(task => {
+              if (task.Exception != null)
+              {
+                  Debug.Log("fail to add new uesr score" + task.Exception.ToString());
               }
               else if (task.IsCompleted)
               {
