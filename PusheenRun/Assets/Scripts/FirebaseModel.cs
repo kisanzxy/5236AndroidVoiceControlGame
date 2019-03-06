@@ -36,8 +36,9 @@ public class FirebaseModel : MonoBehaviour
         if (gameController.isGameOver() && !scoreSent) {
             score = (long) gameController.getScore();
             Debug.Log(mDatabase);
-            AddScore();
+            
             AddNewScoreToUser();
+            AddScore();
             scoreSent = true;
         }
         
@@ -55,7 +56,7 @@ public class FirebaseModel : MonoBehaviour
         mDatabase = FirebaseDatabase.GetInstance(app);
         isFirebaseInitialized = true;
     }
-    private void AddNewScoreToUser() {
+    public void AddNewScoreToUser() {
         DatabaseReference mDatabaseRef = mDatabase.GetReference("user_Maxscore");
         Dictionary<string, object> entryValues = new Dictionary<string, object>();
         entryValues["score"] = score;
@@ -73,6 +74,7 @@ public class FirebaseModel : MonoBehaviour
         {*/
             mDatabaseRef.Child(uid).GetValueAsync().ContinueWith(task =>
             {
+                Debug.Log("continue");
                 if (task.IsFaulted)
                 {
                     Debug.LogError("error get child at user_Maxscore");
@@ -83,7 +85,9 @@ public class FirebaseModel : MonoBehaviour
                     snapshot = task.Result;
 
                 }
-                List<object> result = snapshot.Children as List<object>;
+                //Debug.Log(snapshot.GetValue(false));
+                Dictionary<string, object> result = snapshot.GetValue(false) as Dictionary<string, object>;
+                Debug.Log(result);
                 if (result == null)
                 {
                     childUpdates[uid] = entryValues;
@@ -91,7 +95,7 @@ public class FirebaseModel : MonoBehaviour
                 }
                 else 
                 {
-                    long childScore = (long)((Dictionary<string, object>)result[0])["score"];
+                    long childScore = (long) result["score"];
                     if(childScore < score)
                         mDatabaseRef.Child(uid).Child("score").SetValueAsync(score);
                 }
