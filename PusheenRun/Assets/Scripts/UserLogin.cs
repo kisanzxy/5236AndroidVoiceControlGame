@@ -11,49 +11,20 @@ public class UserLogin : MonoBehaviour
     public InputField Email, Password;
     public Button SignUp, LoginButton;
     public Text ErrorText;
-
+    private string email;
+    private string password;
     // Start is called before the first frame update
     void Start()
     {
         auth = FirebaseAuth.DefaultInstance;
-        //Just an example to save typing in the login form
-        SignUp.onClick.AddListener(() => Signup(Email.text, Password.text));
-        LoginButton.onClick.AddListener(() => Login(Email.text, Password.text));
+        //SignUp.onClick.AddListener(() => Signup(Email.text, Password.text));
+        //LoginButton.onClick.AddListener(() => Login(Email.text, Password.text));
     }
 
     // Update is called once per frame
     void Update()
     {
      
-    }
-    public void Signup(string email, string password)
-    {
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-        {
-            //Error handling
-            return;
-        }
-
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
-        {
-            if (task.IsCanceled)
-            {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
-                return;
-            }
-            if (task.IsFaulted)
-            {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync error: " + task.Exception);
-                if (task.Exception.InnerExceptions.Count > 0)
-                    UpdateErrorMessage(task.Exception.InnerExceptions[0].Message);
-                return;
-            }
-
-            FirebaseUser newUser = task.Result; // Firebase user has been created.
-            Debug.LogFormat("Firebase user created successfully: {0} ({1})",
-                newUser.DisplayName, newUser.UserId);
-            UpdateErrorMessage("Signup Success");
-        });
     }
 
     private void UpdateErrorMessage(string message)
@@ -66,20 +37,24 @@ public class UserLogin : MonoBehaviour
     {
         ErrorText.text = "";
     }
-    public void Login(string email, string password)
+    public void Login( )
     {
+        email = Email.text;
+        password = Password.text;
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
-                Debug.LogError("SignInWithEmailAndPasswordAsync canceled.");
+                Debug.Log("SignInWithEmailAndPasswordAsync canceled.");
                 return;
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("SignInWithEmailAndPasswordAsync error: " + task.Exception);
+                Debug.Log("SignInWithEmailAndPasswordAsync error: " + task.Exception);
                 if (task.Exception.InnerExceptions.Count > 0)
                     UpdateErrorMessage(task.Exception.InnerExceptions[0].Message);
+                Password.text = "";
+
                 return;
             }
 
