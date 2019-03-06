@@ -78,13 +78,6 @@ public class FirebaseModel : MonoBehaviour
         Dictionary<string, object> childUpdates = new Dictionary<string, object>();
 
         Debug.Log(mDatabaseRef.Child(uid));
-        /*if (mDatabaseRef.Child(uid) == null)
-        {
-            childUpdates[uid] = entryValues;
-            mDatabaseRef.UpdateChildrenAsync(childUpdates);
-        }
-        else
-        {*/
             mDatabaseRef.Child(uid).GetValueAsync().ContinueWith(task =>
             {
                 Debug.Log("continue");
@@ -115,9 +108,6 @@ public class FirebaseModel : MonoBehaviour
                 }
 
             });
-
-
-        //}
     }
 
     TransactionResult AddScoreTransaction(MutableData mutableData)
