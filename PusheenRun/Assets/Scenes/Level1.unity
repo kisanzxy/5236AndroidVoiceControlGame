@@ -982,9 +982,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0206c2aae9597468e825ecac40716059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upForce: 10
-  moveSpeed: 2
-  maxSpeed: 5
+  moveSpeed: 4
+  maxSpeed: 15
   groundCheck: {fileID: 2143023007}
   whatIsGround:
     serializedVersion: 2

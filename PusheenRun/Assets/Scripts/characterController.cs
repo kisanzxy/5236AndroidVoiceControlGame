@@ -5,7 +5,7 @@ using UnityEngine;
 public class characterController : MonoBehaviour
 {
     //public float upForce = 50f;    //Upward force for jumping
-    public float moveSpeed = 0;     // horizontal speed
+    public float moveSpeed = 8f;     // horizontal speed
     public float maxSpeed = 8f;
     public Transform groundCheck;
     public LayerMask whatIsGround;
@@ -56,7 +56,7 @@ public class characterController : MonoBehaviour
     }
     void Update()
     {
-        float time = Time.deltaTime * 100;
+        float time = Time.deltaTime * 10;
         //Debug.Log("deltaTime: " + time);
         // Debug.Log(grounded);
         if (grounded)
@@ -67,13 +67,16 @@ public class characterController : MonoBehaviour
         if (first_time_ground)
         {
             float upForce = getUpForce(MicInputController.volume);
-            float y = m_Character.velocity.y + time * upForce;
-            if (y > maxSpeed)
-            {
-                y = 0;
+            Debug.Log("Gravity: "+ Physics2D.gravity.y);
+            float y = upForce + Physics2D.gravity.y*time;
+            if (y < 0) {
+
+                y = Physics2D.gravity.y;
             }
+            //Debug.Log("y： " + y);
+            Debug.Log("afy： " + y);
             m_Character.velocity = new Vector2(m_Character.velocity.x, y);
-            Debug.Log("yVol " + m_Character.velocity.y);
+            //Debug.Log("yVol " + m_Character.velocity.y);
 
         }
     }
@@ -81,22 +84,23 @@ public class characterController : MonoBehaviour
     private float getUpForce(float volume)
     {
         float upForce = 0;
-        if (volume > 300)
+        /*if (volume > 300)
         {
             upForce = 100;
         }
+        else if (volume > 250)
+        {
+            upForce = 70;
+        }
         else if (volume > 200)
         {
-            upForce = 50;
+            upForce = 25;
         }
-        else if (volume > 150)
-        {
-            upForce = 20;
-        }
-        else if (volume > 10)
+        else if (volume > 30)
         {
             upForce = 10;
-        }
+        }*/
+        upForce = volume / 8;
         return upForce;
     }
 
