@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class characterController : MonoBehaviour
 {
-    public float upForce = 50f;    //Upward force for jumping
+    //public float upForce = 50f;    //Upward force for jumping
     public float moveSpeed = 0;     // horizontal speed
-    public float maxSpeed = 5f;
+    public float maxSpeed = 8f;
     public Transform groundCheck;
     public LayerMask whatIsGround;
 
     private SpriteRenderer m_SpriteRenderer;
     private Sprite m_CurSprite;         // sprite used for load image
     private bool isDead = false;    //Has the character fall out of the screen?
-    
+
     private Animator m_Anim;          //Reference to the Animator component.
     private Rigidbody2D m_Character;  //Reference to the Rigidbody2D of the character.
     private BoxCollider2D m_Collider;
+    private bool first_time_ground;
     //private float m_ScaleX, m_ScaleY, m_ScaleZ;
 
 
@@ -42,6 +43,7 @@ public class characterController : MonoBehaviour
         //set size
         m_Collider.size = m_SpriteRenderer.size;
         m_Collider.offset = new Vector2(1f, 2.6f);
+        first_time_ground = false;
     }
 
     // Update is called once per frame
@@ -54,36 +56,55 @@ public class characterController : MonoBehaviour
     }
     void Update()
     {
-
-       // Debug.Log(grounded);
+        float time = Time.deltaTime * 100;
+        //Debug.Log("deltaTime: " + time);
+        // Debug.Log(grounded);
         if (grounded)
+        {
             m_Character.velocity = new Vector2(moveSpeed, m_Character.velocity.y);
-        // Debug.Log(m_Character.velocity.x);
-        if (MicInputController.volume > 100)
-        {
-            m_Character.velocity = new Vector2(m_Character.velocity.x, upForce);
+            first_time_ground = true;
         }
-        else if (MicInputController.volume > 30)
+        if (first_time_ground)
         {
-            divisor = 5;
-            m_Character.velocity = new Vector2(m_Character.velocity.x, upForce / divisor);
-        }
-        else if (MicInputController.volume > 5)
-        {
-            divisor = 10;
-            m_Character.velocity = new Vector2(m_Character.velocity.x, upForce / divisor);
-        }
-        else {
-            //doing nothing
+            float upForce = getUpForce(MicInputController.volume);
+            float y = m_Character.velocity.y + time * upForce;
+            if (y > maxSpeed)
+            {
+                y = 0;
+            }
+            m_Character.velocity = new Vector2(m_Character.velocity.x, y);
+            Debug.Log("yVol " + m_Character.velocity.y);
+
         }
     }
 
+    private float getUpForce(float volume)
+    {
+        float upForce = 0;
+        if (volume > 300)
+        {
+            upForce = 100;
+        }
+        else if (volume > 200)
+        {
+            upForce = 50;
+        }
+        else if (volume > 150)
+        {
+            upForce = 20;
+        }
+        else if (volume > 10)
+        {
+            upForce = 10;
+        }
+        return upForce;
+    }
 
     void Flip()
     {
-    	 facingRight = !facingRight;
-    	 Vector3 theScale = transform.localScale;
-    	 theScale.x *= -1;
-    	 transform.localScale = theScale;
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
