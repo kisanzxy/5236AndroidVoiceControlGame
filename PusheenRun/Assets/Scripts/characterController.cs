@@ -5,11 +5,11 @@ using UnityEngine;
 public class characterController : MonoBehaviour
 {
     //public float upForce = 50f;    //Upward force for jumping
-    public float moveSpeed = 8f;     // horizontal speed
+    public float moveSpeed = 2f;     // horizontal speed
     public float maxSpeed = 8f;
     public Transform groundCheck;
     public LayerMask whatIsGround;
-
+    
     private SpriteRenderer m_SpriteRenderer;
     private Sprite m_CurSprite;         // sprite used for load image
     private bool isDead = false;    //Has the character fall out of the screen?
@@ -17,7 +17,9 @@ public class characterController : MonoBehaviour
     private Animator m_Anim;          //Reference to the Animator component.
     private Rigidbody2D m_Character;  //Reference to the Rigidbody2D of the character.
     private BoxCollider2D m_Collider;
+    private Transform m_Transform;
     private bool first_time_ground;
+    private float maxheight = 4.1f;
     //private float m_ScaleX, m_ScaleY, m_ScaleZ;
 
 
@@ -38,6 +40,7 @@ public class characterController : MonoBehaviour
         //m_Anim = GetComponent<Animator>();
         //Get reference to the Rigidbody2D component attached to the character.
         m_Character = GetComponent<Rigidbody2D>();
+        m_Transform = GetComponent<Transform>();
         //Get reference to the BoxCollider2D component attached to the character.
         m_Collider = GetComponent<BoxCollider2D>();
         //set size
@@ -50,57 +53,41 @@ public class characterController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-
-    }
-    void Update()
-    {
         float time = Time.deltaTime * 10;
         //Debug.Log("deltaTime: " + time);
         // Debug.Log(grounded);
         if (grounded)
         {
-            m_Character.velocity = new Vector2(moveSpeed, m_Character.velocity.y);
             first_time_ground = true;
         }
         if (first_time_ground)
         {
+            m_Character.velocity = new Vector2(moveSpeed, m_Character.velocity.y);
             float upForce = getUpForce(MicInputController.volume);
-            Debug.Log("Gravity: "+ Physics2D.gravity.y);
-            float y = upForce + Physics2D.gravity.y*time;
-            if (y < 0) {
-
-                y = Physics2D.gravity.y;
+            float y = upForce + Physics2D.gravity.y * time;
+            Debug.Log("Screen.height: " + Screen.height);
+            Debug.Log("char pos: " + transform.position.y);
+            if (transform.position.y >= maxheight)
+            {
+                m_Character.velocity = new Vector2(moveSpeed, -1);
             }
-            //Debug.Log("y： " + y);
-            Debug.Log("afy： " + y);
-            m_Character.velocity = new Vector2(m_Character.velocity.x, y);
-            //Debug.Log("yVol " + m_Character.velocity.y);
-
+            else
+                m_Character.AddForce(new Vector2(0, y < 0? 0:y), ForceMode2D.Impulse);
+            
         }
+
+
+    }
+    void Update()
+    {
+
     }
 
     private float getUpForce(float volume)
     {
         float upForce = 0;
-        /*if (volume > 300)
-        {
-            upForce = 100;
-        }
-        else if (volume > 250)
-        {
-            upForce = 70;
-        }
-        else if (volume > 200)
-        {
-            upForce = 25;
-        }
-        else if (volume > 30)
-        {
-            upForce = 10;
-        }*/
-        upForce = volume / 8;
+        upForce = volume/20;
         return upForce;
     }
 
