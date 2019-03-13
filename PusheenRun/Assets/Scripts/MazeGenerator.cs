@@ -116,6 +116,7 @@ public class MazeGenerator : MonoBehaviour {
         CreateCentre();
         RunAlgorithm();
         MakeExit();
+        cellPrefab.SetActive(false);
     }
 
     // This is where the fun stuff happens.
@@ -241,15 +242,19 @@ public class MazeGenerator : MonoBehaviour {
     {
         // Get the 4 centre cells using the rows and columns variables.
         // Remove the required walls for each.
+        // top left of center
         centreCells[0] = allCells[new Vector2((mazeColumns / 2), (mazeRows / 2) + 1)];
         RemoveWall(centreCells[0].cScript, 4);
         RemoveWall(centreCells[0].cScript, 2);
+        // top right of center
         centreCells[1] = allCells[new Vector2((mazeColumns / 2) + 1, (mazeRows / 2) + 1)];
         RemoveWall(centreCells[1].cScript, 4);
         RemoveWall(centreCells[1].cScript, 1);
+        // bottom left of center
         centreCells[2] = allCells[new Vector2((mazeColumns / 2), (mazeRows / 2))];
         RemoveWall(centreCells[2].cScript, 3);
         RemoveWall(centreCells[2].cScript, 2);
+        // bottom right of center
         centreCells[3] = allCells[new Vector2((mazeColumns / 2) + 1, (mazeRows / 2))];
         RemoveWall(centreCells[3].cScript, 3);
         RemoveWall(centreCells[3].cScript, 1);
@@ -325,6 +330,16 @@ public class MazeGenerator : MonoBehaviour {
         public Vector2 gridPos;
         public GameObject cellObject;
         public CellScript cScript;
+    }
+
+    public Dictionary<string, float> getBoundaries(){
+        Dictionary<string, float> boundaries = new Dictionary<string, float>();
+        boundaries.Add("left", -cellSize * (mazeColumns / 2));
+        boundaries.Add("right", cellSize * (mazeColumns / 2));
+        boundaries.Add("top", cellSize * (mazeRows / 2));
+        boundaries.Add("bottom", -cellSize * (mazeRows / 2));
+        Debug.Log(boundaries);
+        return boundaries;
     }
 }
 

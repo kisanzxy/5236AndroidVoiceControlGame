@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     public Image volumeButton;
     public Sprite musicOn;
     public Sprite musicOff;
+    public string level;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +36,15 @@ public class MenuManager : MonoBehaviour
         
     }
 
-    public void startGame() 
+    public void startInfinity() 
     {
+        PlayerPrefs.SetInt("gameMode", 1);
+        SceneManager.LoadScene("CharacterSelection");
+    }
+
+    public void startMaze() 
+    {
+        PlayerPrefs.SetInt("gameMode", 2);
         SceneManager.LoadScene("CharacterSelection");
     }
 
@@ -64,5 +72,10 @@ public class MenuManager : MonoBehaviour
         transparentBackground.SetActive(false);
         instruction.SetActive(false);
         cross.SetActive(false);
+    }
+
+    public void back()
+    {
+        SceneManager.LoadScene("Login");
     }
 }

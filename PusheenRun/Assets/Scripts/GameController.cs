@@ -7,26 +7,29 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
 	public static GameController instance;
-	private bool gameover;
+    private string currentScene;
+	private bool gameover = false;
+    private bool paused = false;
+    private float timer = 0;
     private bool hasAppeared;
-    private bool paused;
-    private float timer;
+
     public Text scoreText;
-	public Text timerText;
-    public GameObject gameoverText;             //A reference to the object that displays the text which appears when the player dies.
+    public GameObject gameoverText;
     public GameObject pauseBackground;
     public GameObject resumeButton;
     public GameObject restartButton;
     public GameObject exitButton;
     public GameObject volumeButton;
-    public SpriteRenderer m_SpriteRenderer;
     public Image volumeButtonImage;
     public Sprite musicOn;
     public Sprite musicOff;
 
-    private int score = 0;                      //The player's score.
-    private int count = 0;
-    public float scrollSpeed = -1.5f;
+    public SpriteRenderer m_SpriteRenderer;
+    public GameObject m_Character;
+
+    public MazeGenerator mazeGenerator;
+    private Dictionary<string, float> boundaries;
+    private int score = 0;
 
     // Initialize game
     void Awake()
@@ -49,56 +52,52 @@ public class GameController : MonoBehaviour
             volumeButtonImage.sprite = musicOff;
         }
         PlayerPrefs.SetInt("PlayerScore", 0);
+        currentScene = SceneManager.GetActiveScene().name;
         //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
-        gameover = false;
-        paused = false;
+        if (currentScene == "Maze"){
+            boundaries = mazeGenerator.getBoundaries();
+            Debug.Log("leftBoundary: " + boundaries["left"]);
+            Debug.Log("topBoundary: " + boundaries["top"]);
+        }
         Time.timeScale = 1;
-        timer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        count++;
-        // //If the game is over and the player has pressed some input...
-        // if (gameOver && Input.GetMouseButtonDown(0)) 
-        // {
-        //     //...reload the current scene.
-        //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        // }
         if(!paused){
             timer += Time.deltaTime;
+            score = (int) timer;
         }
+
         if(m_SpriteRenderer.isVisible){
             hasAppeared = true;
         }
-        if(hasAppeared){ 
-            if(!m_SpriteRenderer.isVisible){
+
+        if (currentScene == "Level1"){
+            if(hasAppeared){ 
+                if(!m_SpriteRenderer.isVisible){
+                    characterDied();
+                }
+            }
+            scoreText.text = "Score: " + score.ToString();
+            if (gameover) {
+                PlayerPrefs.SetInt("PlayerScore", score);
+            }
+
+        } else if (currentScene == "Maze"){
+            if ((m_Character.transform.position.x <= boundaries["left"]) || 
+                (m_Character.transform.position.x >= boundaries["right"]) ||
+                (m_Character.transform.position.y <= boundaries["bottom"]) ||
+                (m_Character.transform.position.y >= boundaries["top"])){
+                
                 characterDied();
             }
-        }
-        if (gameover) {
-            PlayerPrefs.SetInt("PlayerScore", score);
-        }
-        int minutes = (int)(timer/60f);
-        int seconds = (int)(timer % 60f);
-        timerText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
-        if(count == 100)
-        {
-            count = 0;
-            updateScores();
+            int minutes = (int)(timer / 60f);
+            int seconds = (int)(timer % 60f);
+            scoreText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
         }
         
-
-        //Debug.Log(timer);
-    }
-
-    public void updateScores()
-    {
-        if (gameover)   
-            return;
-        score++;
-        scoreText.text = "Score: " + score.ToString();
     }
 
     public void characterDied()
@@ -145,8 +144,10 @@ public class GameController : MonoBehaviour
 
     public void restart()
     {   
-        SceneManager.LoadScene("Level1");
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
+
     public bool isGameOver()
     {
         return this.gameover;
@@ -155,6 +156,7 @@ public class GameController : MonoBehaviour
     public int getScore() {
         return this.score;
     }
+
     public void musicSetting() 
     {
         if(PlayerPrefs.GetInt("musicStatus") == 1){
@@ -165,6 +167,6 @@ public class GameController : MonoBehaviour
             volumeButtonImage.sprite = musicOn;
         }
 
-        //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
+        Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
     }
 }

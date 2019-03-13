@@ -37,7 +37,12 @@ public class SelectionManager : MonoBehaviour
         CharacterSpriteRenderer.CharacterID = cur_id;
     }
     public void selection() {
-        SceneManager.LoadScene("Level1");
+        if (PlayerPrefs.GetInt("gameMode") == 1){
+            SceneManager.LoadScene("Level1");
+        } else if (PlayerPrefs.GetInt("gameMode") == 2){
+            SceneManager.LoadScene("Maze");
+        }
+        
     }
     public void back(){
         SceneManager.LoadScene("StartMenu");
