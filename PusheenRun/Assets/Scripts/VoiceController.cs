@@ -29,46 +29,54 @@ public class VoiceController : MonoBehaviour {
 
     public void clickRecordButton(){
         if (!recording){
-            recording = true;
-            RecordingTime = 0;
-        } else {
-            recording = false;
-        }
-        Debug.Log("recording" + recording);
-    }
-    
-    void FixedUpdate() {
-        if (recording) {
-            m_Character.velocity = new Vector2(0, 0);
             buttonText.text = "Stop Recording";
             button.GetComponent<Image>().color = Color.red;
-
-            RecordingTime += Time.deltaTime;
+            recording = true;
+            RecordingTime = 0;
+            m_Character.velocity = new Vector2(0, 0);
             if (!Microphone.IsRecording(null)) {
                 audioclip = Microphone.Start(null, false, 5, 16000);
                 Debug.Log("Recording started");
             }
+        } else {
+            stopRecordingAndTranslateAction();
+        }
+        Debug.Log("recording" + recording);
+    }
+
+    public void stopMovement(){
+        m_Character.velocity = new Vector2(0, 0);
+    }
+    
+    void FixedUpdate() {
+        if (recording) {
+            RecordingTime += Time.deltaTime;
             if (RecordingTime > 5){
-                recording = false;
-                RecordingTime = 0;
+                stopRecordingAndTranslateAction();
             }
         } else {
-            buttonText.text = "Start Recording";
-            button.GetComponent<Image>().color = Color.green;
-            if (Microphone.IsRecording(null)) {
-                Microphone.End(null);
-                Debug.Log("Recording stopped");
-                if (audioclip != null) {
-                    audiodata = WavUtility.FromAudioClip(audioclip);
-                    string transcript = speechRecognition.GetTranscript(audiodata);
-                    string action = speechRecognition.GetAction(transcript);
-                    audioclip = null;
-                    Debug.Log("Transcript: " + transcript);
-                    Debug.Log("Action: " + action);
-                    transcriptText.text = "You said: " + transcript + "\nAction: " + action;
-                    characterController.Move(action);
-                }
-            }
+            stopRecordingAndTranslateAction();
+        }
+    }
+
+    void stopRecordingAndTranslateAction(){
+    	buttonText.text = "Start Recording";
+        button.GetComponent<Image>().color = Color.green;
+        recording = false;
+        RecordingTime = 0;
+        if (Microphone.IsRecording(null)) {
+            Microphone.End(null);
+            Debug.Log("Recording stopped");
+        }
+    	if (audioclip != null) {
+            audiodata = WavUtility.FromAudioClip(audioclip);
+            string transcript = speechRecognition.GetTranscript(audiodata);
+            string action = speechRecognition.GetAction(transcript);
+            audioclip = null;
+            Debug.Log("Transcript: " + transcript);
+            Debug.Log("Action: " + action);
+            transcriptText.text = "You said: " + transcript + "\nAction: " + action;
+            characterController.Move(action);
         }
     }
 }

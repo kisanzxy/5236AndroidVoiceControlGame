@@ -49,7 +49,6 @@ public class FirebaseModel : MonoBehaviour
         if (gameController.isGameOver() && !scoreSent) {
             score = (long) gameController.getScore();
             Debug.Log(mDatabase);
-            
             AddNewUserScore();
             AddScore();
             scoreSent = true;

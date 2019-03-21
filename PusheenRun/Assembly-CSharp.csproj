@@ -79,19 +79,19 @@
      <None Include="Assets\Firebase\Plugins\Http\link.xml" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -292,37 +292,37 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.App">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Auth">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Platform">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
  </Reference>
  <Reference Include="Google.MiniJson">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
  </Reference>
  <Reference Include="Google.Sharpen">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Database">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Mono/Firebase.Database.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Firebase/Plugins/Mono/Firebase.Database.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Compat">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Tasks">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Assets/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/Gailzhi/Desktop/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>/Users/Gailzhi/Documents/Programs/CSE5236/5236AndroidVoiceControlGame/PusheenRun/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

@@ -48,8 +48,7 @@ public class SpeechRecognition
             VoiceResult voiceResult = JsonUtility.FromJson<VoiceResult>(result);
             transcript = voiceResult.results[0].alternatives[0].transcript;
         }
-        
-		return transcript;
+        return transcript;
 	}
 
     // Get the action from the transcript
