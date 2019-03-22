@@ -22,10 +22,7 @@ public class GameController : MonoBehaviour
     public GameObject resumeButton;
     public GameObject restartButton;
     public GameObject exitButton;
-    public GameObject volumeButton;
-    public Image volumeButtonImage;
-    public Sprite musicOn;
-    public Sprite musicOff;
+    public GameObject showInstructionButton;
     public GameObject instructionBoard;
     public GameObject instruction;
     public GameObject cross;
@@ -52,16 +49,10 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("musicStatus") == 1){
-            volumeButtonImage.sprite = musicOn;
-        } else {
-            volumeButtonImage.sprite = musicOff;
-        }
         PlayerPrefs.SetInt("PlayerScore", 0);
         currentScene = SceneManager.GetActiveScene().name;
-        //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
         if (currentScene == "Maze"){
-            timer = 501;
+            timer = 301;
             boundaries = mazeGenerator.getBoundaries();
             // Debug.Log("leftBoundary: " + boundaries["left"]);
             // Debug.Log("topBoundary: " + boundaries["top"]);
@@ -76,8 +67,6 @@ public class GameController : MonoBehaviour
             hasAppeared = true;
         }
 
-        scoreText.text = "Score: " + score.ToString();
-
         if (currentScene == "Level1"){
             if(!paused){
                 timer += Time.deltaTime;
@@ -85,10 +74,12 @@ public class GameController : MonoBehaviour
             }
             if(hasAppeared){ 
                 if(!m_SpriteRenderer.isVisible){
+                    PlayerPrefs.SetInt("PlayerScore", score);
+                    finalScoreText.text = scoreText.text;
                     characterDied();
                 }
             }
-            // scoreText.text = "Score: " + score.ToString();
+            scoreText.text = "Score: " + score.ToString();
 
         } else if (currentScene == "Maze"){
             if(!paused){
@@ -106,9 +97,9 @@ public class GameController : MonoBehaviour
                 gameoverText.text = "GAMEOVER";
                 characterDied();
             }
-            // int minutes = (int)(timer / 60f);
-            // int seconds = (int)(timer % 60f);
-            // scoreText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
+            int minutes = (int)(timer / 60f);
+            int seconds = (int)(timer % 60f);
+            scoreText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
         }
         
     }
@@ -118,14 +109,14 @@ public class GameController : MonoBehaviour
         paused = true;
         gameover = true;
         Time.timeScale = 0;
-        PlayerPrefs.SetInt("PlayerScore", score);
         pauseBackground.SetActive(true);
-        finalScoreText.text = scoreText.text;
         finalScoreTextObject.SetActive(true);
     	gameoverTextObject.SetActive(true);
         exitButton.SetActive(true);
+        if (currentScene == "Maze"){
+            showInstructionButton.SetActive(true);
+        }
         restartButton.SetActive(true);
-        volumeButton.SetActive(true);
     }
 
     public void pause()
@@ -135,8 +126,10 @@ public class GameController : MonoBehaviour
         pauseBackground.SetActive(true);
         resumeButton.SetActive(true);
         exitButton.SetActive(true);
+        if (currentScene == "Maze"){
+            showInstructionButton.SetActive(true);
+        }
         restartButton.SetActive(true);
-        volumeButton.SetActive(true);
     }
 
     public void resume()
@@ -146,8 +139,10 @@ public class GameController : MonoBehaviour
         pauseBackground.SetActive(false);
         resumeButton.SetActive(false);
         exitButton.SetActive(false);
+        if (currentScene == "Maze"){
+            showInstructionButton.SetActive(false);
+        }
         restartButton.SetActive(false);
-        volumeButton.SetActive(false);
     }
 
     public void exit()
@@ -165,9 +160,7 @@ public class GameController : MonoBehaviour
 
     public void showInstruction()
     {
-        paused = true;
-        Time.timeScale = 0;
-        pauseBackground.SetActive(true);
+        // pauseBackground.SetActive(true);
         instructionBoard.SetActive(true);
         instruction.SetActive(true);
         cross.SetActive(true);
@@ -175,9 +168,7 @@ public class GameController : MonoBehaviour
 
     public void closeInstruction()
     {
-        paused = false;
-        Time.timeScale = 1;
-        pauseBackground.SetActive(false);
+        // pauseBackground.SetActive(false);
         instructionBoard.SetActive(false);
         instruction.SetActive(false);
         cross.SetActive(false);
@@ -196,16 +187,4 @@ public class GameController : MonoBehaviour
         return this.currentScene;
     }
 
-    public void musicSetting() 
-    {
-        if(PlayerPrefs.GetInt("musicStatus") == 1){
-            PlayerPrefs.SetInt("musicStatus", 0);
-            volumeButtonImage.sprite = musicOff;
-        } else {
-            PlayerPrefs.SetInt("musicStatus", 1);
-            volumeButtonImage.sprite = musicOn;
-        }
-
-        Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
-    }
 }
