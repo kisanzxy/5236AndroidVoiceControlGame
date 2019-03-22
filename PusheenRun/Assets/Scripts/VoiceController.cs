@@ -52,15 +52,15 @@ public class VoiceController : MonoBehaviour {
         m_Character.velocity = new Vector2(0, 0);
     }
 
-    void FixedUpdate(){
-        if (makeMovement){
-            Debug.Log("Transcript: " + transcript);
-            Debug.Log("Action: " + action);
-            transcriptText.text = "You said: " + transcript + "\nAction: " + action;
-            characterController.Move(action);
-            makeMovement = false;
-        }
-    }
+    // void FixedUpdate(){
+    //     if (makeMovement){
+    //         Debug.Log("Transcript: " + transcript);
+    //         Debug.Log("Action: " + action);
+    //         transcriptText.text = "You said: " + transcript + "\nAction: " + action;
+    //         characterController.Move(action);
+    //         makeMovement = false;
+    //     }
+    // }
     
     void Update() {
         if (recording) {
@@ -82,8 +82,15 @@ public class VoiceController : MonoBehaviour {
         }
     	if (audioclip != null) {
             byte[] audiodata = WavUtility.FromAudioClip(audioclip);
-            thread = new Thread (new ParameterizedThreadStart(process));
-            thread.Start ((object) audiodata);
+            // thread = new Thread (new ParameterizedThreadStart(process));
+            // thread.Start ((object) audiodata);
+            transcript = speechRecognition.GetTranscript(audiodata);
+            action = speechRecognition.GetAction(transcript);
+            audioclip = null;
+            Debug.Log("Transcript: " + transcript);
+            Debug.Log("Action: " + action);
+            transcriptText.text = "You said: " + transcript + "\nAction: " + action;
+            characterController.Move(action);
         }
     }
 
@@ -92,6 +99,7 @@ public class VoiceController : MonoBehaviour {
         Debug.Log("Thread started");
         transcript = speechRecognition.GetTranscript(audiodata);
         action = speechRecognition.GetAction(transcript);
-        audioclip = null;        makeMovement = true;
+        audioclip = null;
+        makeMovement = true;
     }
 }
