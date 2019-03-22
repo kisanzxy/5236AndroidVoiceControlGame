@@ -16,7 +16,6 @@ public class SpeechRecognition
 	public string GetTranscript(byte[] audio)
 	{
         string file64 = Convert.ToBase64String(audio, Base64FormattingOptions.None);
-        Debug.Log(file64);
         string httpURL = this.apiBaseUrl + this.apiKey;
         string result = "";
 
@@ -38,7 +37,7 @@ public class SpeechRecognition
             StreamReader streamReader = new StreamReader(response.GetResponseStream());
 			result = streamReader.ReadToEnd();
             Debug.Log("Response: " + result);
-            Debug.Log("Response length: " + result.Length);
+            // Debug.Log("Response length: " + result.Length);
 			streamReader.Close();
 		}
 
@@ -46,7 +45,10 @@ public class SpeechRecognition
         // Get valid speech
         if (result.Length > 3){
             VoiceResult voiceResult = JsonUtility.FromJson<VoiceResult>(result);
-            transcript = voiceResult.results[0].alternatives[0].transcript;
+            transcript = voiceResult.results[0].alternatives[0].transcript.ToLower();
+            if(transcript.Length > 23){
+                transcript = transcript.Substring(0,23);
+            }
         }
         return transcript;
 	}

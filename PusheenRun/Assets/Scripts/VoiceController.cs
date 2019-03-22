@@ -8,7 +8,11 @@ using System.Threading;
 public class VoiceController : MonoBehaviour {
     AudioClip audioclip;
     bool recording;
-    byte[] audiodata;
+    private Thread thread;
+    private string transcript = "nothing";
+    private string action = "none";
+    private bool makeMovement = false;
+
     public Rigidbody2D m_Character;
 
     public Text transcriptText; 
@@ -47,15 +51,23 @@ public class VoiceController : MonoBehaviour {
     public void stopMovement(){
         m_Character.velocity = new Vector2(0, 0);
     }
+
+    void FixedUpdate(){
+        if (makeMovement){
+            Debug.Log("Transcript: " + transcript);
+            Debug.Log("Action: " + action);
+            transcriptText.text = "You said: " + transcript + "\nAction: " + action;
+            characterController.Move(action);
+            makeMovement = false;
+        }
+    }
     
-    void FixedUpdate() {
+    void Update() {
         if (recording) {
             RecordingTime += Time.deltaTime;
             if (RecordingTime > 5){
                 stopRecordingAndTranslateAction();
             }
-        } else {
-            stopRecordingAndTranslateAction();
         }
     }
 
@@ -69,14 +81,17 @@ public class VoiceController : MonoBehaviour {
             Debug.Log("Recording stopped");
         }
     	if (audioclip != null) {
-            audiodata = WavUtility.FromAudioClip(audioclip);
-            string transcript = speechRecognition.GetTranscript(audiodata);
-            string action = speechRecognition.GetAction(transcript);
-            audioclip = null;
-            Debug.Log("Transcript: " + transcript);
-            Debug.Log("Action: " + action);
-            transcriptText.text = "You said: " + transcript + "\nAction: " + action;
-            characterController.Move(action);
+            byte[] audiodata = WavUtility.FromAudioClip(audioclip);
+            thread = new Thread (new ParameterizedThreadStart(process));
+            thread.Start ((object) audiodata);
         }
+    }
+
+    void process(object obj) {
+        byte[] audiodata = (byte[]) obj;
+        Debug.Log("Thread started");
+        transcript = speechRecognition.GetTranscript(audiodata);
+        action = speechRecognition.GetAction(transcript);
+        audioclip = null;        makeMovement = true;
     }
 }

@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public GameObject transparentBackground;
+    public GameObject instructionBoard;
     public GameObject instruction;
     public GameObject cross;
     public Image volumeButton;
     public Sprite musicOn;
     public Sprite musicOff;
-    public string level;
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +28,6 @@ public class MenuManager : MonoBehaviour
         }
         
         //Debug.Log(PlayerPrefs.GetInt("musicStatus").ToString());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void startInfinity() 
@@ -63,6 +57,7 @@ public class MenuManager : MonoBehaviour
     public void showInstruction()
     {
     	transparentBackground.SetActive(true);
+        instructionBoard.SetActive(true);
         instruction.SetActive(true);
         cross.SetActive(true);
     }
@@ -70,6 +65,7 @@ public class MenuManager : MonoBehaviour
     public void closeInstruction()
     {
         transparentBackground.SetActive(false);
+        instructionBoard.SetActive(false);
         instruction.SetActive(false);
         cross.SetActive(false);
     }

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 	private bool gameover = false;
     private bool paused = false;
     private float timer = 0;
-    private bool hasAppeared;
+    private bool hasAppeared = false;
 
     public Text scoreText;
     public Text gameoverText;
@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour
     public Image volumeButtonImage;
     public Sprite musicOn;
     public Sprite musicOff;
+    public GameObject instructionBoard;
+    public GameObject instruction;
+    public GameObject cross;
 
     public SpriteRenderer m_SpriteRenderer;
     public GameObject m_Character;
@@ -60,8 +63,8 @@ public class GameController : MonoBehaviour
         if (currentScene == "Maze"){
             timer = 501;
             boundaries = mazeGenerator.getBoundaries();
-            Debug.Log("leftBoundary: " + boundaries["left"]);
-            Debug.Log("topBoundary: " + boundaries["top"]);
+            // Debug.Log("leftBoundary: " + boundaries["left"]);
+            // Debug.Log("topBoundary: " + boundaries["top"]);
         }
         Time.timeScale = 1;
     }
@@ -158,6 +161,26 @@ public class GameController : MonoBehaviour
     public void restart()
     {   
         SceneManager.LoadScene(currentScene);
+    }
+
+    public void showInstruction()
+    {
+        paused = true;
+        Time.timeScale = 0;
+        pauseBackground.SetActive(true);
+        instructionBoard.SetActive(true);
+        instruction.SetActive(true);
+        cross.SetActive(true);
+    }
+
+    public void closeInstruction()
+    {
+        paused = false;
+        Time.timeScale = 1;
+        pauseBackground.SetActive(false);
+        instructionBoard.SetActive(false);
+        instruction.SetActive(false);
+        cross.SetActive(false);
     }
 
     public bool isGameOver()
