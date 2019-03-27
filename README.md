@@ -29,4 +29,7 @@
  <br>Includes Analytics by default 
  <br>Finally, press "Sync now" in the bar that appears in the IDE:
 
-
+<br> **References**
+<br> [1] Android Open Source Project, Android, http://developers.android.com
+<br> [2] Firebase, https://firebase.google.com/
+<br> [3] Pusheen the Cat, http://pusheen.com/page/2
