@@ -32,4 +32,4 @@
 <br> **References**
 <br> [1] Android Open Source Project, Android, http://developers.android.com
 <br> [2] Firebase, https://firebase.google.com/
-<br> [3] Pusheen the Cat, http://pusheen.com/page/2
+<br> [3] Pusheen the Cat, http://pusheen.com/
