@@ -73,7 +73,8 @@ public class GameController : MonoBehaviour
                 score = (int) timer;
             }
             if(hasAppeared){ 
-                if(!m_SpriteRenderer.isVisible){
+                if (m_Character.transform.position.y < -6f){
+                // if(!m_SpriteRenderer.isVisible){
                     PlayerPrefs.SetInt("PlayerScore", score);
                     finalScoreText.text = scoreText.text;
                     characterDied();

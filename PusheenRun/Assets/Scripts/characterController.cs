@@ -39,10 +39,10 @@ public class characterController : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
         if (currentScene == "Level1"){
             m_Transform = GetComponent<Transform>();
-            m_Collider = GetComponent<BoxCollider2D>();
+            // m_Collider = GetComponent<BoxCollider2D>();
             //set size
-            m_Collider.size = m_SpriteRenderer.size;
-            m_Collider.offset = new Vector2(1f, 2.6f);
+            // m_Collider.size = m_SpriteRenderer.size;
+            // m_Collider.offset = new Vector2(1f, 2.6f);
             first_time_ground = false;
         } else if (currentScene == "Maze"){
             m_Character.velocity = new Vector2(0, 0);
@@ -69,8 +69,9 @@ public class characterController : MonoBehaviour
                 {
                     m_Character.velocity = new Vector2(moveSpeed, -1);
                 }
-                else
+                else{
                     m_Character.AddForce(new Vector2(0, y < 0? 0:y), ForceMode2D.Impulse);
+                }
                 
             }
         }
@@ -79,7 +80,7 @@ public class characterController : MonoBehaviour
     private float getUpForce(float volume)
     {
         float upForce = 0;
-        upForce = volume/20;
+        upForce = volume/150;
         return upForce;
     }
 
