@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
                 (m_Character.transform.position.y <= boundaries["bottom"]) ||
                 (m_Character.transform.position.y >= boundaries["top"])){
                 gameoverText.text = "CONGRATULATIONS";
-                characterDied();
+                characterWin();
             }
             if (timer <= 0){
                 gameoverText.text = "GAMEOVER";
@@ -103,6 +103,21 @@ public class GameController : MonoBehaviour
             scoreText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
         }
         
+    }
+    public void characterWin()
+    {
+        paused = true;
+        gameover = false;
+        Time.timeScale = 0;
+        pauseBackground.SetActive(true);
+        finalScoreTextObject.SetActive(true);
+        gameoverTextObject.SetActive(true);
+        exitButton.SetActive(true);
+        if (currentScene == "Maze")
+        {
+            showInstructionButton.SetActive(true);
+        }
+        restartButton.SetActive(true);
     }
 
     public void characterDied()
